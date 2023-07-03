@@ -27,11 +27,20 @@ public class MemberDto {
 	}
 		
 	public MemberDto() {	}
+	
+	// 매출용 생성자
+	public MemberDto(int custno, String custname, String grade, int sum) {
+		super();
+		this.custno = custno;
+		this.custname = custname;
+		this.grade = grade;
+		this.sum = sum;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberDto [custno=" + custno + ", custname=" + custname + ", phone=" + phone + ", address=" + address
-				+ ", joindate=" + joindate + ", grade=" + grade + ", city=" + city + "]";
+				+ ", joindate=" + joindate + ", grade=" + grade + ", city=" + city + ", sum=" + sum + "]";
 	}
 
 	public int getCustno() {
@@ -89,6 +98,16 @@ public class MemberDto {
 	public void setCity(int city) {
 		this.city = city;
 	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+
 	
 	
 }

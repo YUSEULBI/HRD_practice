@@ -115,4 +115,26 @@ public class Dao {
 		} catch (Exception e) { System.out.println("회원수정 예외 : " + e); }
 		return false;
 	}
+	
+	public ArrayList<MemberDto> getSales(){
+		ArrayList<MemberDto> memberDtos = new ArrayList();
+		String sql = "select member.custno, member.custname,  "
+				+ "	case "
+				+ "		when grade = 'A' then 'VIP' "
+				+ "		when grade = 'B' then '일반'  "
+				+ "		else '직원'  "
+				+ "	end as g, "
+				+ "	sum(money.price) as summoney "
+				+ "from member_tbl_02 member, money_tbl_02 money "
+				+ "where member.custno = money.custno "
+				+ "group by member.custno, member.custname, member.grade order by summoney desc";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				memberDtos.add(new MemberDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+			}
+		} catch (Exception e) { System.out.println("매출조회 예외"); }
+		return memberDtos;
+	}
 }
