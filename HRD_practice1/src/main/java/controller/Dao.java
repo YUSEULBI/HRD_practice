@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Dao {
 	
@@ -59,5 +60,27 @@ public class Dao {
 			ps.executeUpdate(); return true;
 		} catch (Exception e) { System.out.println("회원등록 예외 "+e); }
 		return false;
+	}
+	
+	// 회원목록출력
+	public ArrayList<MemberDto> getMemberList(){
+		ArrayList<MemberDto> memArrayList = new ArrayList();
+		String sql = "select custno , custname , phone ,  address , joindate , "
+				+ "	case "
+				+ "		when grade = 'A' then 'VIP' "
+				+ "		when grade = 'B' then '일반'  "
+				+ "		else '직원'  "
+				+ "	end as g, "
+				+ "	city from member_tbl_02";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				memArrayList.add(new MemberDto(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
+			}
+		} catch (Exception e) {
+			System.out.println("회원목록출력 예외 "+e);
+		}
+		return memArrayList;
 	}
 }

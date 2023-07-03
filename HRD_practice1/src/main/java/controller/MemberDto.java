@@ -9,6 +9,8 @@ public class MemberDto {
 	private String joindate; 
 	private String grade;
 	private int city;
+	// 추가 매출
+	private int sum;
 
 	
 	// 생성자
