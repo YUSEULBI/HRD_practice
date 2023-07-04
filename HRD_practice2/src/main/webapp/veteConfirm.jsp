@@ -38,6 +38,8 @@
 					Period age = Period.between(birthDate, currentDate);
 					int ageInYears = age.getYears();
 					String ageString = "만 "+ageInYears+"세";
+					//"만 " + ( LocalDate.now().getYear() - Integer.parseInt( "19"+dto.getV_jumin().substring(0,2) ) ) +"세" 이렇게 바로 적어도 됨.
+					
 					String sex = dto.getV_jumin().substring(6,7);
 					if ( dto.getV_jumin().substring(6,7).equals("1") ){
 						sex = "남";
