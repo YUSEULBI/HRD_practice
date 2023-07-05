@@ -42,8 +42,10 @@ public class HrdScore extends HttpServlet {
 		int eeng = Integer.parseInt(request.getParameter("eeng"));
 		int ehist = Integer.parseInt(request.getParameter("ehist"));
 		
-		Dao dao = new Dao();
-		new Dao.addScore(new Dto(sno, ekor, emath, eeng, ehist)) ;
+		boolean result = new Dao().addScore(new Dto(sno, ekor, emath, eeng, ehist)) ;
+		if ( result ) {
+			response.sendRedirect("/HRD_practice3/score.jsp");
+		}
 	}
 
 }

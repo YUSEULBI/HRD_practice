@@ -14,7 +14,7 @@
 		<tr>
 			<th><a href="view.jsp">학생목록</a></th>
 			<th><a href="score.jsp">성적입력</a></th>
-			<th><a href="#">학생성적</a></th>
+			<th><a href="scoreview.jsp">학생성적</a></th>
 			<th><a href="index.jsp">홈으로</a></th>
 		</tr>
 	</table>
