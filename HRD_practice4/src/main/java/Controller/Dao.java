@@ -76,4 +76,23 @@ public class Dao {
 		System.out.println("false");
 		return false;
 	}
+	
+	// 검사결과조회
+	public List<Dto> getResultList(){
+		List<Dto> dtoList = new ArrayList<>();
+		String sql = "select p.p_no , p.p_name , t.t_name , r.t_sdate ,  "
+				+ "case when r.t_status = '1' then '검사중' when r.t_status = '2' then '검사완료' end as status ,  "
+				+ "r.t_ldate ,  "
+				+ "case when r.t_result = 'X' then '미입력' when r.t_result = 'P' then '양성' when r.t_result = 'N' then '음성' end as result "
+				+ "from tbl_patient_202004 p , tbl_result_202004 r , tbl_lab_test_202004 t  "
+				+ "where p.p_no = r.p_no and t.t_code = r.t_code";
+		try {
+			ps =con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while ( rs.next() ) {
+				dtoList.add(new Dto(rs.getString(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(3)));
+			}
+		} catch (Exception e) { System.out.println("검사결과조회 예외 : "+e); }
+		return dtoList;
+	}
 }

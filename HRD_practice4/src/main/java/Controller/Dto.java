@@ -15,6 +15,9 @@ public class Dto {
 	private String t_ldate;
 	private String t_result;
 	
+	//검사결과조회용 필드추가
+	private String t_name;
+	
 	public Dto() {	}
 
 	// 환자조회 생성자
@@ -39,7 +42,18 @@ public class Dto {
 		this.t_result = t_result;
 	}
 	
-
+	//검사결과조회 생성자
+	public Dto(String p_no, String p_name, String t_sdate, String t_status, String t_ldate, String t_result,
+			String t_name) {
+		super();
+		this.p_no = p_no;
+		this.p_name = p_name;
+		this.t_sdate = t_sdate;
+		this.t_status = t_status;
+		this.t_ldate = t_ldate;
+		this.t_result = t_result;
+		this.t_name = t_name;
+	}
 
 
 		//getter setter
@@ -48,6 +62,8 @@ public class Dto {
 		}
 
 
+
+	
 
 		public void setP_no(String p_no) {
 			this.p_no = p_no;
@@ -131,6 +147,14 @@ public class Dto {
 
 		public void setT_result(String t_result) {
 			this.t_result = t_result;
+		}
+
+		public String getT_name() {
+			return t_name;
+		}
+
+		public void setT_name(String t_name) {
+			this.t_name = t_name;
 		}
 		
 		
