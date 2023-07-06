@@ -18,6 +18,10 @@ public class Dto {
 	//검사결과조회용 필드추가
 	private String t_name;
 	
+	//통계용 필드추가
+	private String p_city_name;
+	private int count;
+	
 	public Dto() {	}
 
 	// 환자조회 생성자
@@ -54,16 +58,25 @@ public class Dto {
 		this.t_result = t_result;
 		this.t_name = t_name;
 	}
+	
+	// 통계용 생성자
+	public Dto(String p_city, String p_city_name, int count) {
+		super();
+		this.p_city = p_city;
+		this.p_city_name = p_city_name;
+		this.count = count;
+	}
 
-
-		//getter setter
-		public String getP_no() {
-			return p_no;
-		}
+	//getter setter
+	public String getP_no() {
+		return p_no;
+	}
 
 
 
 	
+
+
 
 		public void setP_no(String p_no) {
 			this.p_no = p_no;
@@ -156,6 +169,23 @@ public class Dto {
 		public void setT_name(String t_name) {
 			this.t_name = t_name;
 		}
+
+		public String getP_city_name() {
+			return p_city_name;
+		}
+
+		public void setP_city_name(String p_city_name) {
+			this.p_city_name = p_city_name;
+		}
+
+		public int getCount() {
+			return count;
+		}
+
+		public void setCount(int count) {
+			this.count = count;
+		}
+		
 		
 		
 }

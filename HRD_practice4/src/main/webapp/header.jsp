@@ -15,8 +15,8 @@
 			<tr>
 				<th style="padding: 0px 10px;"><a href="patientview.jsp">환자조회</a></th>
 				<th style="padding: 0px 10px;"><a href="add.jsp">검사결과입력</a></th>
-				<th style="padding: 0px 10px;"><a href="#">검사결과조회</a></th>
-				<th style="padding: 0px 10px;"><a href="#">검사건수통계</a></th>
+				<th style="padding: 0px 10px;"><a href="testview.jsp">검사결과조회</a></th>
+				<th style="padding: 0px 10px;"><a href="teststats.jsp">검사건수통계</a></th>
 				<th style="padding: 0px 10px;"><a href="index.jsp">홈으로</a></th>
 			</tr>
 		</table>

@@ -85,7 +85,7 @@ public class Dao {
 				+ "r.t_ldate ,  "
 				+ "case when r.t_result = 'X' then '미입력' when r.t_result = 'P' then '양성' when r.t_result = 'N' then '음성' end as result "
 				+ "from tbl_patient_202004 p , tbl_result_202004 r , tbl_lab_test_202004 t  "
-				+ "where p.p_no = r.p_no and t.t_code = r.t_code";
+				+ "where p.p_no = r.p_no and t.t_code = r.t_code order by p.p_no asc";
 		try {
 			ps =con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -94,5 +94,36 @@ public class Dao {
 			}
 		} catch (Exception e) { System.out.println("검사결과조회 예외 : "+e); }
 		return dtoList;
+	}
+	
+	//지역별 검사건수통계
+	public List<Dto> getStats(){
+		List<Dto> dtoList = new ArrayList<>();
+		String sql = "select p.p_city ,  "
+				+ "	case "
+				+ "		when p_city = '10' then '서울' "
+				+ "		when p_city = '20' then '경기' "
+				+ "		when p_city = '30' then '강원' "
+				+ "		when p_city = '40' then '대구' "
+				+ "	end as cityname , "
+				+ "	count(*)   "
+				+ " from tbl_patient_202004 p , tbl_result_202004 r , tbl_lab_test_202004 t "
+				+ " where p.p_no = r.p_no and t.t_code = r.t_code "
+				+ " group by p.p_city , case "
+				+ "		when p_city = '10' then '서울' "
+				+ "		when p_city = '20' then '경기' "
+				+ "		when p_city = '30' then '강원' "
+				+ "		when p_city = '40' then '대구' "
+				+ "	end  "
+				+ "order by p.p_city asc";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next()) {
+				dtoList.add(new Dto(rs.getString(1), rs.getString(2), rs.getInt(3)));
+			}
+		} catch (Exception e) {
+			System.out.println("검사건수통계 예외 : "+e);
+		}return dtoList;
 	}
 }
