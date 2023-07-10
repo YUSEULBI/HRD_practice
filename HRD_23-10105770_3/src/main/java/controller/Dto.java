@@ -19,6 +19,7 @@ public class Dto {
 	// 순위 추가 필드
 	public int sum;
 	public double avg;
+	public int rank;
 	
 	
 	public Dto() {	}
@@ -67,6 +68,23 @@ public class Dto {
 		this.avg = avg;
 	}
 
+	//순위 생성자2
+	public Dto(String sname, String sgrade, String sclass, String snumber, int ekor, int emath, int eeng, int ehist,
+			int sum, double avg, int rank) {
+		super();
+		this.sname = sname;
+		this.sgrade = sgrade;
+		this.sclass = sclass;
+		this.snumber = snumber;
+		this.ekor = ekor;
+		this.emath = emath;
+		this.eeng = eeng;
+		this.ehist = ehist;
+		this.sum = sum;
+		this.avg = avg;
+		this.rank = rank;
+	}	
+	
 	public String getSno() {
 		return sno;
 	}
@@ -177,6 +195,14 @@ public class Dto {
 
 	public void setAvg(double avg) {
 		this.avg = avg;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 	
 	

@@ -54,12 +54,13 @@ select
 	order by ( e.ekor + e.emath + e.eeng + e.ehist ) desc;
 
 select 
-	substr( s.sno , 1 , 1 ) ,
-	substr( s.sno , 2 , 2 ) ,
-	substr( s.sno , 4 , 2 ) ,
+	substr( s.sno , 1 , 1 ) as grade ,
+	substr( s.sno , 2 , 2 ) as class ,
+	substr( s.sno , 4 , 2 ) as num ,
 	s.sname , e.ekor , e.emath , e.eeng , e.ehist ,
-	( e.ekor + e.emath + e.eeng + e.ehist ) as sum , 
-	( e.ekor + e.emath + e.eeng + e.ehist )/4 as avg , 
-	RANK() OVER ( ORDER BY NVL(e.ekor,0) + NVL(e.emath,0) + NVL(e.eeng,0) + NVL(e.ehist,0) DESC ) AS RANK
-	from student_tbl_03 s full outer join exam_tbl_03 e on s.sno = e.sno
-	order by ( NVL(e.ekor,0) + NVL(e.emath,0) + NVL(e.eeng,0) + NVL(e.ehist,0) ) desc;
+	( e.ekor + e.emath + e.eeng + e.ehist ) as sum ,
+	( e.ekor + e.emath + e.eeng + e.ehist )/4 as avg ,
+	rank() over ( order by ( nvl(e.ekor,0) + nvl(e.emath,0) + nvl(e.eeng,0) + nvl(e.ehist,0) ) desc ) as rank 
+	from student_tbl_03 s full outer join exam_tbl_03 e 
+	on s.sno = e.sno
+	order by ( nvl(e.ekor,0) + nvl(e.emath,0) + nvl(e.eeng,0) + nvl(e.ehist,0) ) desc ;

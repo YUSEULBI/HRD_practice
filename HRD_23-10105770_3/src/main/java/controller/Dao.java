@@ -100,5 +100,37 @@ public class Dao {
 			System.out.println("순위 예외 : "+e);
 		}return dtoList;
 	}
+	
+	// 순위조회2
+	public List<Dto> getRank2(){
+		List<Dto> dtoList = new ArrayList();
+		String sql = "select  "
+				+ "	substr( s.sno , 1 , 1 ) as grade , "
+				+ "	substr( s.sno , 2 , 2 ) as class , "
+				+ "	substr( s.sno , 4 , 2 ) as num , "
+				+ "	s.sname , e.ekor , e.emath , e.eeng , e.ehist , "
+				+ "	( e.ekor + e.emath + e.eeng + e.ehist ) as sum , "
+				+ "	( e.ekor + e.emath + e.eeng + e.ehist )/4 as avg , "
+				+ "	rank() over ( order by ( nvl(e.ekor,0) + nvl(e.emath,0) + nvl(e.eeng,0) + nvl(e.ehist,0) ) desc ) as rank  "
+				+ "	from student_tbl_03 s full outer join exam_tbl_03 e  "
+				+ "	on s.sno = e.sno "
+				+ "	order by ( nvl(e.ekor,0) + nvl(e.emath,0) + nvl(e.eeng,0) + nvl(e.ehist,0) ) desc";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while ( rs.next() ) {
+				System.out.println(rs.getString(5));
+				dtoList.add(
+						new Dto(
+								rs.getString(4), rs.getString(1), rs.getString(2), rs.getString(3), 
+								rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getDouble(10) , rs.getInt(11)
+						)
+				);
+			}
+		} catch (Exception e) {
+			System.out.println("순위 예외 : "+e);
+		}return dtoList;
+	}
 		
 }

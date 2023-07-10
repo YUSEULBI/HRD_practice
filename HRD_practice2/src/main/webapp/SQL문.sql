@@ -84,3 +84,8 @@ from tbl_member_202005 m , tbl_party_202005 p where m.P_CODE = p.P_CODE;
 
 select V_NAME , V_JUMIN , M_NO , V_TIME , V_CONFIRM 
 from TBL_VOTE_202005 where V_AREA = '제1투표장';
+
+
+select m.M_NO , m.M_NAME , count(*) as countnum
+from TBL_MEMBER_202005 m , TBL_VOTE_202005 v
+where m.M_NO = v.M_NO and v.V_CONFIRM = 'Y' group by m.M_NO , m.M_NAME order by countnum desc
